@@ -1,0 +1,1885 @@
+{
+  "name": "Entrega Final AI Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1woGi98mb4nNPMdMSUIc0qIMi6r1NYFdWuE2gGtbxutk",
+          "mode": "list",
+          "cachedResultName": "Formulario Entrega Final RC (respuestas)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1woGi98mb4nNPMdMSUIc0qIMi6r1NYFdWuE2gGtbxutk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1400222043,
+          "mode": "list",
+          "cachedResultName": "Respuestas de formulario 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1woGi98mb4nNPMdMSUIc0qIMi6r1NYFdWuE2gGtbxutk/edit#gid=1400222043"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "id": "e8c8c6d8-7778-4b23-bff3-b85df3e8c2dc",
+      "name": "Google Sheets Trigger",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        144
+      ],
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "I5JLvuWggCCLiCvb",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app7Eff23PLhpjyIS",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHpCxqmZQRhkRvA",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS/tblHpCxqmZQRhkRvA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Marca temporal": "={{ $json['Marca temporal'] }}",
+            "Nombre y Apellido": "={{ $json['Nombre y Apellido'] }}",
+            "Email": "={{ $json.Email }}",
+            "Telefono": "={{ $json.Telefono == null ? null : $json.Telefono.toString() }}",
+            "Problema cliente": "={{ $json['Problema o necesidad que tiene'] }}",
+            "Fecha deseada": "={{ $json['Fecha deseada visita tecnico'] ? $json['Fecha deseada visita tecnico'].split('/').reverse().join('-') : null }}",
+            "Estatus solicitud": "={{ 'Sin Contactar' }}",
+            "Urgente?": "={{ $json['¿Es urgente?'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Marca temporal",
+              "displayName": "Marca temporal",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Nombre y Apellido",
+              "displayName": "Nombre y Apellido",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Telefono",
+              "displayName": "Telefono",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Canal Slack",
+              "displayName": "Canal Slack",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Problema cliente",
+              "displayName": "Problema cliente",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha deseada",
+              "displayName": "Fecha deseada",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Urgente?",
+              "displayName": "Urgente?",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estatus solicitud",
+              "displayName": "Estatus solicitud",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tecnico A Cargo",
+              "displayName": "Tecnico A Cargo",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "typecast": true
+        }
+      },
+      "id": "8d23da18-0ddb-4d5c-9703-1a601b2e3416",
+      "name": "Create a record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        144
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "3hgOCL0QwRNWourF",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.fields['Urgente?'] }}",
+                    "rightValue": "Sí",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "caed4b0a-5221-4036-980b-093bc62aee93"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "URGENTE"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "No Urgente"
+        }
+      },
+      "id": "81eae7fa-01f0-42e1-b268-cab06ecde68a",
+      "name": "Switch1",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        144
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://slack.com/api/chat.postMessage",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "slackApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"channel\": \"C0BPBLEL6FJ\",\n  \"text\": \"🚨 SOLICITUD URGENTE - {{ $('Create a record').item.json.fields['Nombre y Apellido'] }}\",\n  \"blocks\": [\n    {\n      \"type\": \"header\",\n      \"text\": {\n        \"type\": \"plain_text\",\n        \"text\": \"🚨 SOLICITUD URGENTE DE ATENCIÓN\",\n        \"emoji\": true\n      }\n    },\n    {\n      \"type\": \"section\",\n      \"fields\": [\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Cliente:*\\n{{ $('Create a record').item.json.fields['Nombre y Apellido'] }}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Teléfono:*\\n{{ $('Create a record').item.json.fields['Telefono'] }}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Email:*\\n{{ $('Create a record').item.json.fields['Email'] }}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Fecha Solicitada:*\\n{{ $('Create a record').item.json.fields['Fecha deseada'] }}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*ID Airtable:*\\n`{{ $('Create a record').item.json.id }}`\"\n        }\n      ]\n    },\n    {\n      \"type\": \"section\",\n      \"text\": {\n        \"type\": \"mrkdwn\",\n        \"text\": \"*Problema / Detalle:*\\n{{ $('Create a record').item.json.fields['Problema cliente'] }}\"\n      }\n    },\n    {\n      \"type\": \"context\",\n      \"elements\": [\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"📌 Record ID: `{{ $('Create a record').item.json.id }}`\"\n        }\n      ]\n    },\n    {\n      \"type\": \"divider\"\n    },\n    {\n      \"type\": \"actions\",\n      \"elements\": [\n        {\n          \"type\": \"button\",\n          \"text\": {\n            \"type\": \"plain_text\",\n            \"text\": \"📞 Ya comunicado\",\n            \"emoji\": true\n          },\n          \"style\": \"primary\",\n          \"value\": \"ya_comunicado| {{ $('Create a record').item.json.id }} | {{ $json.canal_destino }} | {{ $('Create a record').item.json.fields['Fecha deseada'] }} | {{ $('Create a record').item.json.fields.Email }} | {{ $('Create a record').item.json.fields.Telefono }} | {{ $('Create a record').item.json.fields['Nombre y Apellido'] }}\",\n          \"action_id\": \"btn_ya_comunicado\"\n        }\n      ]\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "c6255fc2-cc58-4b10-90fb-d4abb3d3f493",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        784,
+        0
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "rHuhCVe9eBF2cpk4",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Sos un derivador de trabajo a distintas especialidades segun se detalla en matriz. Los clientes van a enviar a travez del formulario los distintos tipos de trabajos que requieren en sus domicilios y vos vas a contestar con una unica palabra en base al tipo de trabajo que requiera el cliente.\n\nEl tipo de trabajo esta en este campo: {{ $json.fields['Problema cliente'] }}\n\nLos servicios son:\n1. Si el cliente tiene un problema o necesita ayuda con un aire acondicionado. Resultado= InstaladorAC\n2. Si el cliente tiene un problema de humedad o necesita ayuda con pintura. Resultado= Pintor\n3. Si el cliente tiene un problema o necesita ayuda en su instalacion electrica. Resultado= Electricista\n4. Si el cliente tiene un problema o necesita ayuda con gas. Resultado = Gasista\n5. Para cualquier otro caso que no puedas determinar si es para aire acondicionado, pintor, electricista o gasista. Resultado = Coordinador\n\nGuarda el resultado en la variable Resultado para que pueda seguir el flujo",
+        "options": {
+          "systemMessage": "Sos un derivador de solicitudes de servicio. Responde SIEMPRE con una unica palabra que sea una de: InstaladorAC, Pintor, Electricista, Gasista o Coordinador. No agregues explicaciones ni texto adicional."
+        }
+      },
+      "id": "d73f82b6-430f-49ce-91f0-21fa9e27f7fe",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        672,
+        192
+      ],
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-v4-flash",
+        "options": {}
+      },
+      "id": "c1cdf988-663d-4ce0-845b-4f956ab28510",
+      "name": "DeepSeek Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        672,
+        352
+      ],
+      "credentials": {
+        "deepSeekApi": {
+          "id": "O1Q4GwiuS5DcJaYv",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e8ea0cab-4919-4073-82eb-1c234bc6b224",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "InstaladorAC",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "d60df5de-3889-4084-aba7-b171247b145f",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "Electricista",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "4d0e84ad-b637-45a7-b301-a8bd37a5c07a",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "Pintor",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "ed04e88f-543e-433f-afd6-1a15ce40b270",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "Gasista",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "91c72b0b-414b-4d91-957d-33e3c9fa4c16",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1024,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const servicio = $('AI Agent').first().json.output;\nlet canalId = \"\";\n\nswitch (servicio) {\n  case \"Electricista\":\n    canalId = \"C0BNLNJ6M28\";\n    break;\n  case \"Pintor\":\n    canalId = \"C0BNM110M8U\";\n    break;\n  case \"InstaladorAC\":\n    canalId = \"C0BN1UNCXBR\"\n    break;\n  case \"Gasista\":\n    canalId = \"C0BNFANEYP8\"\n  default:\n    canalId = \"C0BPBLEL6FJ\";\n}\n\nreturn {\n  json: {\n    ...$input.first().json,\n    canal_destino: canalId\n  }\n};"
+      },
+      "id": "616ee7f0-f372-4dae-af4c-8b0822484819",
+      "name": "Code in JavaScript1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1248,
+        288
+      ],
+      "notes": "Javascript que en base al resultado de la IA deriva a los canales de Slack"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://slack.com/api/chat.postMessage",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "slackApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"channel\": \"{{ $json.canal_destino }}\",\n  \"text\": \"Nueva solicitud de {{ $('Google Sheets Trigger').item.json['Nombre y Apellido'] }}\",\n  \"blocks\": [\n    {\n      \"type\": \"section\",\n      \"text\": {\n        \"type\": \"mrkdwn\",\n        \"text\": \"*Nueva Solicitud de Instalación Pendiente de Aprobación*\\n*Cliente:* {{ $('Google Sheets Trigger').item.json['Nombre y Apellido'] }}\\n*Teléfono:* {{ $('Google Sheets Trigger').item.json.Telefono }}\\n*Servicio:* {{ $('Google Sheets Trigger').item.json['Problema o necesidad que tiene'] }}\\n*FechaDeseada:* {{ $('Google Sheets Trigger').item.json['Fecha deseada visita tecnico'] }}\"\n      }\n    },\n    {\n      \"type\": \"actions\",\n      \"elements\": [\n        {\n          \"type\": \"button\",\n          \"text\": {\n            \"type\": \"plain_text\",\n            \"text\": \"✅ Aprobar\"\n          },\n          \"style\": \"primary\",\n            \"value\": \"aprobado | {{ $('Create a record').item.json.id }} | {{ $json.canal_destino }} | {{ $('Create a record').item.json.fields['Fecha deseada'] }} | {{ $('Create a record').item.json.fields.Email }} | {{ $('Create a record').item.json.fields.Telefono }} | {{ $('Create a record').item.json.fields['Nombre y Apellido'] }} | {{ $('AI Agent').item.json.output }}\",\n          \"action_id\": \"btn_aprobar\"\n        },\n        {\n          \"type\": \"button\",\n          \"text\": {\n            \"type\": \"plain_text\",\n            \"text\": \"❌ Rechazar\"\n          },\n          \"style\": \"danger\",\n          \"value\": \"rechazado | {{ $('Create a record').item.json.id }} | {{ $json.canal_destino }} | {{ $('Create a record').item.json.fields['Fecha deseada'] }} | {{ $('Create a record').item.json.fields.Email }} | {{ $('Create a record').item.json.fields.Telefono }} | {{ $('Create a record').item.json.fields['Nombre y Apellido'] }} | {{ $('AI Agent').item.json.output }}\",\n          \"action_id\": \"btn_rechazar\"\n        }\n      ]\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "18408811-b3dd-4fd6-b198-e716ad2b80c3",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1472,
+        288
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "rHuhCVe9eBF2cpk4",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://slack.com/api/chat.postMessage",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "slackApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"channel\": \"C0BPBLEL6FJ\",\n  \"text\": \"⚠️ REVISIÓN MANUAL - {{ $('Create a record').item.json.fields['Nombre y Apellido'] }}\",\n  \"blocks\": [\n    {\n      \"type\": \"header\",\n      \"text\": {\n        \"type\": \"plain_text\",\n        \"text\": \"⚠️ REQUIERE REVISIÓN MANUAL\",\n        \"emoji\": true\n      }\n    },\n    {\n      \"type\": \"section\",\n      \"fields\": [\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Airtable ID:*\\n`{{ $('Create a record').item.json.id }}`\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Cliente:*\\n{{ $('Create a record').item.json.fields['Nombre y Apellido'] }}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Teléfono:*\\n{{ $('Create a record').item.json.fields['Telefono'] }}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Email:*\\n{{ $('Create a record').item.json.fields['Email'] }}\"\n        }\n      ]\n    },\n    {\n      \"type\": \"section\",\n      \"text\": {\n        \"type\": \"mrkdwn\",\n        \"text\": \"*Texto cargado por el cliente:*\\n> {{ $('Create a record').item.json.fields['Problema cliente'] }}\"\n      }\n    },\n    {\n      \"type\": \"divider\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "73794f33-05a5-463c-a13f-8e6cf238db5a",
+      "name": "HTTP Request3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1248,
+        128
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "rHuhCVe9eBF2cpk4",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://slack.com/api/chat.postMessage",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "slackApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"channel\": \"{{ $('Code in JavaScript2').item.json.canal_destino }}\",\n  \"text\": \"Aprobado! Se envia calendar a cliente\"\n}",
+        "options": {}
+      },
+      "id": "808c50ef-ffd5-48b2-95b2-f5720a301c09",
+      "name": "HTTP Request2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1104,
+        736
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "rHuhCVe9eBF2cpk4",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "er.rodrigocrettaz@gmail.com",
+          "mode": "list",
+          "cachedResultName": "er.rodrigocrettaz@gmail.com"
+        },
+        "start": "={{ $('Code in JavaScript2').item.json.fecha_deseada }}",
+        "end": "={{ DateTime.fromISO($('Code in JavaScript2').item.json.fecha_deseada).plus({ hours: 1 }).toISO() }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ $('Code in JavaScript2').item.json.email }}",
+            "er.rodrigocrettaz@gmail.com"
+          ],
+          "description": "=Servicio {{ $('Code in JavaScript2').item.json.ai_output }}",
+          "guestsCanInviteOthers": true,
+          "guestsCanSeeOtherGuests": true,
+          "summary": "=Servicio cliente: {{ $('Code in JavaScript2').item.json.nombre_apellido }}"
+        }
+      },
+      "id": "fc418bda-591d-481c-842f-5cc5442bf736",
+      "name": "Create an event",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        1344,
+        736
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "oF3A774TSNWI3tg0",
+          "name": "Google Calendar account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app7Eff23PLhpjyIS",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHpCxqmZQRhkRvA",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS/tblHpCxqmZQRhkRvA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estatus solicitud": "Coordinada visita tecnica",
+            "id": "={{ $('Code in JavaScript2').item.json.airtableId }}",
+            "Tecnico A Cargo": "={{ $('Code in JavaScript2').item.json.usuario_slack }}",
+            "Canal Slack": "={{ $('Code in JavaScript2').item.json.canal_destino }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Marca temporal",
+              "displayName": "Marca temporal",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Nombre y Apellido",
+              "displayName": "Nombre y Apellido",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Telefono",
+              "displayName": "Telefono",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Canal Slack",
+              "displayName": "Canal Slack",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Problema cliente",
+              "displayName": "Problema cliente",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Fecha deseada",
+              "displayName": "Fecha deseada",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Urgente?",
+              "displayName": "Urgente?",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Estatus solicitud",
+              "displayName": "Estatus solicitud",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tecnico A Cargo",
+              "displayName": "Tecnico A Cargo",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "be2826ef-bf5c-44d7-97c7-e1725a7d583c",
+      "name": "Update record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        1568,
+        736
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "3hgOCL0QwRNWourF",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app7Eff23PLhpjyIS",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHpCxqmZQRhkRvA",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS/tblHpCxqmZQRhkRvA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estatus solicitud": "Tecnico coordina",
+            "id": "={{ $('Code in JavaScript2').item.json.airtableId }}",
+            "Tecnico A Cargo": "={{ $('Code in JavaScript2').item.json.usuario_slack }}",
+            "Canal Slack": "={{ $('Code in JavaScript2').item.json.canal_destino }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Marca temporal",
+              "displayName": "Marca temporal",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Nombre y Apellido",
+              "displayName": "Nombre y Apellido",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Telefono",
+              "displayName": "Telefono",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Canal Slack",
+              "displayName": "Canal Slack",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Problema cliente",
+              "displayName": "Problema cliente",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Fecha deseada",
+              "displayName": "Fecha deseada",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Urgente?",
+              "displayName": "Urgente?",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Estatus solicitud",
+              "displayName": "Estatus solicitud",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tecnico A Cargo",
+              "displayName": "Tecnico A Cargo",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "e71e387a-f94c-4e76-b44c-1b465653f322",
+      "name": "Update record2",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        1104,
+        928
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "3hgOCL0QwRNWourF",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "interacciones-slack",
+        "options": {}
+      },
+      "id": "d26bfc6a-6e11-4e9b-8423-cbfbe0d4ec33",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -64,
+        528
+      ],
+      "webhookId": "6020a139-b851-4e59-935e-3b5a62fb5348"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Extraemos el cuerpo que envía Slack a través del Webhook\nconst body = $input.first().json.body;\n\n// 2. Leemos la propiedad payload\nlet rawPayload = body.payload;\nif (typeof rawPayload === 'string') {\n  try {\n    rawPayload = JSON.parse(decodeURIComponent(rawPayload));\n  } catch (e) {\n    rawPayload = JSON.parse(rawPayload);\n  }\n}\n\n// 3. Extraemos el usuario que hizo clic y el valor guardado en el botón\nconst usuarioSlack = rawPayload.user ? (rawPayload.user.name || rawPayload.user.username) : 'Desconocido';\nconst actionValue = rawPayload.actions && rawPayload.actions[0] ? rawPayload.actions[0].value : '';\n\n// 4. Separamos por \"|\" y limpiamos espacios de cada elemento\nconst parts = actionValue.split('|').map(p => p.trim());\n\n/* \n  Estructura limpia esperada (8 elementos):\n  parts[0] -> accion\n  parts[1] -> airtableId\n  parts[2] -> canal_destino\n  parts[3] -> fecha_deseada\n  parts[4] -> email\n  parts[5] -> telefono\n  parts[6] -> nombre_apellido\n  parts[7] -> ai_output\n*/\n\nconst accion = parts[0] || 'desconocido';\nconst airtableId = parts[1] || null;\nconst canalSlack = parts[2] || (rawPayload.channel ? (rawPayload.channel.id || rawPayload.channel.name) : null);\nconst fechaDeseada = parts[3] || null;\nconst email = parts[4] || null;\nconst telefono = parts[5] || null;\nconst nombreApellido = parts[6] || null;\nconst aiOutput = parts[7] || null;\n\n// 5. Devolvemos el objeto mapeado correctamente\nreturn {\n  json: {\n    accion: accion,\n    airtableId: airtableId,\n    canal_destino: canalSlack,\n    fecha_deseada: fechaDeseada,\n    email: email,\n    telefono: telefono,\n    nombre_apellido: nombreApellido,\n    ai_output: aiOutput,\n    usuario_slack: usuarioSlack\n  }\n};"
+      },
+      "id": "879a85b9-05ae-4a4e-8509-72520aca1aee",
+      "name": "Code in JavaScript2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        144,
+        528
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Code in JavaScript2').item.json.accion }}",
+                    "rightValue": "ya_comunicado",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "ee8ad3a2-0862-45e9-a2c7-d94ca4584164"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Urgente"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "7cf36b99-fa87-4dd4-906a-ff608695118c",
+                    "leftValue": "={{ $('Code in JavaScript2').item.json.accion }}",
+                    "rightValue": "aprobado",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "enviar cita"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "94897f16-4cbf-4bf8-93f7-21d13f58468d",
+                    "leftValue": "={{ $('Code in JavaScript2').item.json.accion }}",
+                    "rightValue": "rechazado",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "tecnico coordina"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "63844a72-dd6e-4fa8-a18f-c5704ca9c538",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        528
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app7Eff23PLhpjyIS",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHpCxqmZQRhkRvA",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS/tblHpCxqmZQRhkRvA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estatus solicitud": "Contactado por urgencia",
+            "id": "={{ $('Code in JavaScript2').item.json.airtableId }}",
+            "Tecnico A Cargo": "={{ $('Code in JavaScript2').item.json.usuario_slack }}",
+            "Canal Slack": "={{ $('Code in JavaScript2').item.json.canal_destino }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Marca temporal",
+              "displayName": "Marca temporal",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Nombre y Apellido",
+              "displayName": "Nombre y Apellido",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Telefono",
+              "displayName": "Telefono",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Canal Slack",
+              "displayName": "Canal Slack",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Problema cliente",
+              "displayName": "Problema cliente",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Fecha deseada",
+              "displayName": "Fecha deseada",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Urgente?",
+              "displayName": "Urgente?",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Estatus solicitud",
+              "displayName": "Estatus solicitud",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tecnico A Cargo",
+              "displayName": "Tecnico A Cargo",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "fca96b98-9752-4c2f-88ec-effa99adf09f",
+      "name": "Update record1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        1104,
+        560
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "3hgOCL0QwRNWourF",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://slack.com/api/chat.postMessage",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "slackApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"channel\": \"C0BPBLEL6FJ\",\n  \"text\": \"✅ Estado actualizado para el registro {{ $('Code in JavaScript2').item.json.airtableId }}\",\n  \"blocks\": [\n    {\n      \"type\": \"section\",\n      \"text\": {\n        \"type\": \"mrkdwn\",\n        \"text\": \"✅ *Gestión Registrada Con Éxito*\\n\\n• *ID Airtable:* `{{ $('Code in JavaScript2').item.json.airtableId }}`\\n• *Acción:* `{{ $('Code in JavaScript2').item.json.accion }}`\\n• *Operador:* `@{{ $('Code in JavaScript2').item.json.usuario_slack }}`\"\n      }\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1328,
+        560
+      ],
+      "id": "6a38d32e-b40e-4344-9a59-83fe951b9e86",
+      "name": "HTTP Request4",
+      "credentials": {
+        "slackApi": {
+          "id": "rHuhCVe9eBF2cpk4",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://slack.com/api/chat.postMessage",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "slackApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"channel\": \"{{ $json.canal_destino || 'C0BPBLEL6FJ' }}\",\n  \"text\": \"Técnico coordina por su cuenta\",\n  \"blocks\": [\n    {\n      \"type\": \"header\",\n      \"text\": {\n        \"type\": \"plain_text\",\n        \"text\": \"Técnico coordina por su cuenta\",\n        \"emoji\": true\n      }\n    },\n    {\n      \"type\": \"section\",\n      \"fields\": [\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Cliente:*\\n{{ $json.nombre_apellido || $json.fields['Nombre y Apellido'] }}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Teléfono:*\\n{{ $json.telefono || $json.fields.Telefono }}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Email:*\\n{{ $json.email || $json.fields.Email }}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Fecha Solicitada:*\\n{{ $json.fecha_deseada || $json.fields['Fecha deseada'] }}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*ID Airtable:*\\n`{{ $json.airtableId || $json.id }}`\"\n        }\n      ]\n    },\n    {\n      \"type\": \"context\",\n      \"elements\": [\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"📌 Record ID: `{{ $json.airtableId || $json.id }}` | Gestionado por: `@`{{ $('Code in JavaScript2').item.json.usuario_slack }}\"\n        }\n      ]\n    },\n    {\n      \"type\": \"divider\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1328,
+        928
+      ],
+      "id": "6aa1a25e-d29b-4a1d-965c-2123e03a0e2c",
+      "name": "HTTP Request5",
+      "credentials": {
+        "slackApi": {
+          "id": "rHuhCVe9eBF2cpk4",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "base": {
+          "__rl": true,
+          "value": "app7Eff23PLhpjyIS",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHpCxqmZQRhkRvA",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS/tblHpCxqmZQRhkRvA"
+        },
+        "id": "={{ $json.airtableId }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        352,
+        528
+      ],
+      "id": "f69e87b9-6c4e-4c51-9744-0b9851c2fcd0",
+      "name": "Get a record",
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "3hgOCL0QwRNWourF",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "751ea89a-f87a-4fae-a5cc-582607e4c55a",
+              "leftValue": "={{ $json.fields['Estatus solicitud'] }}",
+              "rightValue": "Sin Contactar",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        528,
+        528
+      ],
+      "id": "01bbad15-f3f2-4f29-9a3d-cadfae901f77",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://slack.com/api/chat.postMessage",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "slackApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"channel\": \"{{ $('Code in JavaScript2').item.json.canal_destino }}\",\n  \"text\": \"Tecnico {{ $('Code in JavaScript2').item.json.usuario_slack }} toma caso manual. ID {{ $('Code in JavaScript2').item.json.airtableId }}. Recuerde avisar a coordinación una vez coordinado\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1552,
+        928
+      ],
+      "id": "b3cd4dac-abab-42b0-85dd-61bb9c2b8c3f",
+      "name": "HTTP Request6",
+      "credentials": {
+        "slackApi": {
+          "id": "rHuhCVe9eBF2cpk4",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://slack.com/api/chat.postMessage",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "slackApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"channel\": \"{{ $('Code in JavaScript2').item.json.canal_destino }}\",\n  \"text\": \"{{ $('Code in JavaScript2').item.json.usuario_slack }} ya tomo caso. ID {{ $('Code in JavaScript2').item.json.airtableId }}. Por favor contactarse con él\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        800,
+        720
+      ],
+      "id": "a277ed46-0800-42c2-84b1-7b3087d12515",
+      "name": "HTTP Request7",
+      "credentials": {
+        "slackApi": {
+          "id": "rHuhCVe9eBF2cpk4",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "documentId": {
+          "__rl": true,
+          "value": "1woGi98mb4nNPMdMSUIc0qIMi6r1NYFdWuE2gGtbxutk",
+          "mode": "list",
+          "cachedResultName": "Formulario Entrega Final RC (respuestas)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1woGi98mb4nNPMdMSUIc0qIMi6r1NYFdWuE2gGtbxutk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1400222043,
+          "mode": "list",
+          "cachedResultName": "Respuestas de formulario 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1woGi98mb4nNPMdMSUIc0qIMi6r1NYFdWuE2gGtbxutk/edit#gid=1400222043"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1648,
+        0
+      ],
+      "id": "994c5a16-45d1-4b60-b1a1-f6ae8b80620b",
+      "name": "Delete rows or columns from sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "MM4NeRibiAWOMyqD",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app7Eff23PLhpjyIS",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHpCxqmZQRhkRvA",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://airtable.com/app7Eff23PLhpjyIS/tblHpCxqmZQRhkRvA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estatus solicitud": "A revisar",
+            "id": "={{ $('Create a record').item.json.id }}",
+            "Canal Slack": "C0BPBLEL6FJ"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Marca temporal",
+              "displayName": "Marca temporal",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Nombre y Apellido",
+              "displayName": "Nombre y Apellido",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Telefono",
+              "displayName": "Telefono",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Canal Slack",
+              "displayName": "Canal Slack",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Problema cliente",
+              "displayName": "Problema cliente",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Fecha deseada",
+              "displayName": "Fecha deseada",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Urgente?",
+              "displayName": "Urgente?",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Estatus solicitud",
+              "displayName": "Estatus solicitud",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tecnico A Cargo",
+              "displayName": "Tecnico A Cargo",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        1440,
+        128
+      ],
+      "id": "e56d56b0-8797-4f73-81ab-a533a11e99e3",
+      "name": "Update record3",
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "3hgOCL0QwRNWourF",
+          "name": "Airtable account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Create an event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an event": {
+      "main": [
+        [
+          {
+            "node": "Update record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Get a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Update record1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update record2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update record1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update record2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a record": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request5": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Delete rows or columns from sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Delete rows or columns from sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Update record3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update record3": {
+      "main": [
+        [
+          {
+            "node": "Delete rows or columns from sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update record": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request4": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request6": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "6114b101-64f7-44b4-be68-1081e9bae7a1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "72b9e35096f56fe07ab38c7b0fcbc296a31a843a264c37086aa550b7cfdc9000"
+  },
+  "nodeGroups": [],
+  "id": "y3TaZjCFdABlIyHj",
+  "tags": []
+}
